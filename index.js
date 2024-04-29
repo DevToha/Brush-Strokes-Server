@@ -51,12 +51,31 @@ async function run() {
             res.send(result)
         })
 
-        // app.get('/item/:id', async (req, res) => {
-        //     const id = req.params.id
-        //     const query = { _id: new ObjectId(id) }
-        //     const result = await itemCollection.findOne(query)
-        //     res.send(result)
-        // })
+        app.put('/item/:id', async (req, res) => {
+            const id = req.params.id
+            const filter = { _id: new ObjectId(id) }
+            const options = { upsert: true };
+            const updatedItem = req.body
+
+            const item = {
+                $set: {
+                    itemName: updatedItem.itemName,
+                    subcategoryName: updatedItem.subcategoryName,
+                    shortDescription: updatedItem.shortDescription,
+                    processingTime: updatedItem.processingTime,
+                    userName: updatedItem.userName,
+                    price: updatedItem.price,
+                    rating: updatedItem.rating,
+                    photoURL: updatedItem.photoURL,
+                    customization: updatedItem.customization,
+                    userEmail: updatedItem.userEmail,
+                    stockStatus: updatedItem.stockStatus
+                }
+            }
+
+            const result = await itemCollection.updateOne(filter, item, options);
+            res.send(result)
+        })
 
         app.delete('/item/:id', async (req, res) => {
             const id = req.params.id
