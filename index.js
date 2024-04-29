@@ -51,6 +51,20 @@ async function run() {
             res.send(result)
         })
 
+        // app.get('/item/:id', async (req, res) => {
+        //     const id = req.params.id
+        //     const query = { _id: new ObjectId(id) }
+        //     const result = await itemCollection.findOne(query)
+        //     res.send(result)
+        // })
+
+        app.delete('/item/:id', async (req, res) => {
+            const id = req.params.id
+            const query = { _id: new ObjectId(id) }
+            const result = await itemCollection.deleteOne(query)
+            res.send(result)
+        })
+
         app.post('/item', async (req, res) => {
             const newItem = req.body
             console.log(newItem)
