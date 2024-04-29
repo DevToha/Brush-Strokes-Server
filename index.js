@@ -45,6 +45,12 @@ async function run() {
             res.send(result)
         })
 
+        app.get("/myProduct/:email", async (req, res) => {
+            console.log(req.params.email)
+            const result = await itemCollection.find({ email: req.params.email }).toArray();
+            res.send(result)
+        })
+
         app.post('/item', async (req, res) => {
             const newItem = req.body
             console.log(newItem)
