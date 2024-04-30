@@ -30,6 +30,8 @@ async function run() {
         // Connect the client to the server	(optional starting in v4.7)
         await client.connect();
 
+        // ////
+
         const itemCollection = client.db('itemDB').collection('item')
 
         app.get('/item', async (req, res) => {
@@ -38,6 +40,8 @@ async function run() {
             res.send(result)
         })
 
+        // /////
+
         app.get('/item/:id', async (req, res) => {
             const id = req.params.id
             const query = { _id: new ObjectId(id) }
@@ -45,11 +49,15 @@ async function run() {
             res.send(result)
         })
 
+        //  //////
+
         app.get("/myProduct/:email", async (req, res) => {
             console.log(req.params.email)
             const result = await itemCollection.find({ email: req.params.email }).toArray();
             res.send(result)
         })
+
+        // ////
 
         app.put('/item/:id', async (req, res) => {
             const id = req.params.id
@@ -77,6 +85,8 @@ async function run() {
             res.send(result)
         })
 
+        // ////
+
         app.delete('/item/:id', async (req, res) => {
             const id = req.params.id
             const query = { _id: new ObjectId(id) }
@@ -84,12 +94,16 @@ async function run() {
             res.send(result)
         })
 
+        // ////
+
         app.post('/item', async (req, res) => {
             const newItem = req.body
             console.log(newItem)
             const result = await itemCollection.insertOne(newItem)
             res.send(result)
         })
+
+        // ///
 
 
         // Send a ping to confirm a successful connection
