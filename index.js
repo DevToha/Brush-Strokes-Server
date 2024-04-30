@@ -34,6 +34,16 @@ async function run() {
 
         const itemCollection = client.db('itemDB').collection('item')
 
+        // const subcategoryNameCollection = client.db('itemDB').collection('subcategoryName')
+
+        // app.get('/subcategoryName', async (req, res) => {
+        //     const cursor = subcategoryNameCollection.find()
+        //     const result = await cursor.toArray()
+        //     res.send(result)
+        // })
+
+        // //
+
         app.get('/item', async (req, res) => {
             const cursor = itemCollection.find()
             const result = await cursor.toArray()
